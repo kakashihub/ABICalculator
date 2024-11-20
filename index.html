@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <title>ABI Calculator: Peripheral Circulation Assessment</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Calculate your Ankle-Brachial Index to assess peripheral circulation and potential cardiovascular risks.">
+        <meta name="keywords" content="ABI, Ankle-Brachial Index, PAD, Cardiovascular Health">
+        
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+        
+        <script type="application/ld+json">
+          ${JSON.stringify(jsonLdSchema)}
+        </script>
+        
+        <style>
+          ${css}
+        </style>
+      </head>
+      <body>
+        <div id="root"></div>
+        <script src="https://esm.town/v/std/catch"></script>
+        <script type="module" src="${import.meta.url}"></script>
+      </body>
+    </html>
+  `, {
+    headers: { 
+      "content-type": "text/html",
+      "Cache-Control": "public, max-age=3600"
+    }
+  });
+}
+
+const css = `
+:root {
+  --color-primary: #3498db;
+  --color-secondary: #2ecc71;
+  --color-background: #f4f6f9;
+  --color-text: #2c3e50;
+  --color-white: #ffffff;
+  --shadow-subtle: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-medium: 0 10px 25px rgba(0, 0, 0, 0.15);
+  --transition-speed: 0.3s;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: linear-gradient(135deg, #f4f6f9, #e9ecef);
+  color: var(--color-text);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1000px;
+}
+
+.abi-calculator {
+  background: var(--color-white);
+  border-radius: 20px;
+  box-shadow: var(--shadow-medium);
+  max-width: 900px;
+  width: 100%;
+  padding: 40px;
+  transform: rotateX(-10deg);
+  transition: all 0.5s ease;
+  overflow: hidden;
+}
+
+.abi-calculator:hover {
+  transform: rotateX(0);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.glass-morphism {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: var(--shadow-subtle);
+}
+
+header {
+  text-align: center;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.pulse-animation {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+header h1 {
+  color: var(--color-primary);
+  font-weight: 700;
+  margin-bottom: 10px;
+  letter-spacing: -1px;
+}
+
+.measurement-section {
+  background: linear-gradient(to right, #f9fafb, #f1f5f9);
+  padding: 30px;
+  border-radius: 15px;
+  transition: all var(--transition-speed);
+}
+
+.input-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group label {
+  margin-bottom: 10px;
+  font-weight: 500;
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.input-field {
+  padding: 12px 15px;
+  border: 2px solid #e0e6ed;
+  border-radius: 12px;
+  transition: all var(--transition-speed);
+  background: var(--color-white);
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.calculate-btn {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: var(--color-white);
+  border: none;
+  border-radius: 12px;
+  margin-top: 20px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all var(--transition-speed);
+  position: relative;
+  overflow: hidden;
+}
+
+.calculate-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: all 0.5s;
+}
+
+.calculate-btn:hover::before {
+  left: 100%;
+}
+
+.calculate-btn.calculating {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.error-message {
+  background: linear-gradient(135deg, #ff4757, #ff6b6b);
+  color: var(--color-white);
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.shake-animation {
+  animation: shake 0.5s;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+.results-section {
+  margin-top: 30px;
+}
+
+.result-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.result-card {
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: var(--shadow-subtle);
+  transition: transform var(--transition-speed);
+}
+
+.result-card:hover {
+  transform: scale(1.05);
+}
+
+.slide-in {
+  animation: slideIn 0.5s ease;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.abi-value {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 15px 0;
+}
+
+.disclaimer {
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .input-grid,
+  .result-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .abi-calculator {
+    padding: 20px;
+    transform: none;
+  }
+
+  .abi-calculator:hover {
+    transform: none;
+  }
+}
